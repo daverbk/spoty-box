@@ -24,7 +24,7 @@ var spotifyApi = new SpotifyWebApi({
 
 function truncate(str, n){
     return (str.length > n) ? str.substr(0, n-1) + '…' : str;
-};
+}
 
 async function updateGist(lines, des) {
     let gist;
@@ -39,7 +39,6 @@ async function updateGist(lines, des) {
     try {
       await octokit.gists.update({
         gist_id: gistId,
-        description: `🎧 Spotify | ${des}`,
         files: {
           [filename]: {
               content: lines
@@ -62,7 +61,7 @@ async function getTopTracks() {
 
         var lines = [];
         tracks.forEach(track => {
-            lines.push(` ▶ ${truncate(track.title + " ", 35).padEnd(35, '.')} 🎵 ${truncate(track.artist + " ", 16)}`)
+            lines.push(` ▶ ${truncate(track.title + " ", 35).padEnd(30, '.')} 🎵 ${truncate(track.artist + " ", 16)}`)
         })
         return lines.join("\n");
     } catch (error) {
